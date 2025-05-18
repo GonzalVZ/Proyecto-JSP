@@ -3,147 +3,130 @@ CREATE DATABASE web_futbol CHARACTER SET utf8mb4;
 USE web_futbol;
 
 CREATE TABLE Equipos (
-    id_equipo INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    nombre VARCHAR(50) NOT NULL UNIQUE,
-    estadio VARCHAR(50),
-    imagen_escudo VARCHAR(50),
-    imagen_estadio VARCHAR(50),
-    imagen_plantilla VARCHAR(50),
-    imagen_camiseta_local VARCHAR(100),
-    imagen_camiseta_visitante VARCHAR(100)
+                         id_equipo INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+                         nombre VARCHAR(50) NOT NULL UNIQUE,
+                         estadio VARCHAR(50),
+                         imagen_escudo VARCHAR(50),
+                         imagen_estadio VARCHAR(50),
+                         imagen_camiseta_local VARCHAR(100),
+                         imagen_camiseta_visitante VARCHAR(100)
 );
 
 CREATE TABLE Partidos (
-    id_partido INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    fecha DATE NOT NULL
+                          id_partido INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+                          fecha DATE NOT NULL
 );
 
 CREATE TABLE Juegan (
-    id_partido INT UNSIGNED,
-    id_equipo INT UNSIGNED,
-    goles INT,
-    PRIMARY KEY (id_partido, id_equipo),
-    FOREIGN KEY (id_partido) REFERENCES Partidos(id_partido),
-    FOREIGN KEY (id_equipo) REFERENCES Equipos(id_equipo)
+                        id_partido INT UNSIGNED,
+                        id_equipo INT UNSIGNED,
+                        goles INT,
+                        PRIMARY KEY (id_partido, id_equipo),
+                        FOREIGN KEY (id_partido) REFERENCES Partidos(id_partido),
+                        FOREIGN KEY (id_equipo) REFERENCES Equipos(id_equipo)
 );
 
 CREATE TABLE Usuarios(
-id_usuario INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-email VARCHAR(50),
-password VARCHAR(50),
-puntos INT
+                         id_usuario INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+                         email VARCHAR(50),
+                         password VARCHAR(50),
+                         puntos INT
 
 );
 
 CREATE TABLE Apuestas (
-    id_partido INT UNSIGNED,
-    id_usuario INT UNSIGNED,
-    puntos_apostados INT,
-    PRIMARY KEY(id_partido, id_usuario),
-    FOREIGN KEY(id_partido) REFERENCES Partidos(id_partido),
-    FOREIGN KEY(id_usuario) REFERENCES Usuarios(id_usuario)
+                          id_partido INT UNSIGNED,
+                          id_usuario INT UNSIGNED,
+                          puntos_apostados INT,
+                          PRIMARY KEY(id_partido, id_usuario),
+                          FOREIGN KEY(id_partido) REFERENCES Partidos(id_partido),
+                          FOREIGN KEY(id_usuario) REFERENCES Usuarios(id_usuario)
 );
 
 CREATE TABLE Apuestas_Detalle (
-    id_partido INT UNSIGNED,
-    id_usuario INT UNSIGNED,
-    id_equipo INT UNSIGNED,
-    goles_apostados INT,
-    PRIMARY KEY(id_partido, id_usuario, id_equipo),
-    FOREIGN KEY (id_partido, id_usuario) REFERENCES Apuestas(id_partido, id_usuario),
-    FOREIGN KEY (id_equipo) REFERENCES Equipos(id_equipo)
+                                  id_partido INT UNSIGNED,
+                                  id_usuario INT UNSIGNED,
+                                  id_equipo INT UNSIGNED,
+                                  goles_apostados INT,
+                                  PRIMARY KEY(id_partido, id_usuario, id_equipo),
+                                  FOREIGN KEY (id_partido, id_usuario) REFERENCES Apuestas(id_partido, id_usuario),
+                                  FOREIGN KEY (id_equipo) REFERENCES Equipos(id_equipo)
 );
 
 
-INSERT INTO Equipos (nombre, estadio, imagen_escudo, imagen_estadio, imagen_plantilla, imagen_camiseta_local, imagen_camiseta_visitante)
-VALUES ('Alaves', 'Mendizorrotza', 'escudos/alaves.png', 'estadios/alaves.jpg', 'plantillas/alaves.jpg', 'camisetas/alaves_local.jpg', 'camisetas/alaves_visitante.jpg');
+INSERT INTO Equipos (nombre, estadio, imagen_escudo, imagen_estadio, imagen_camiseta_local, imagen_camiseta_visitante) VALUES ('Alaves', 'Mendizorrotza', 'escudos/alaves.png', 'estadios/Alaves.jpg', 'camisetas_local/camisetalocalAlaves.jpg', 'camisetas_visitante/camisetavisitanteAlaves.jpg');
+INSERT INTO Equipos (nombre, estadio, imagen_escudo, imagen_estadio, imagen_camiseta_local, imagen_camiseta_visitante) VALUES ('Athletic', 'San Mamés', 'escudos/athletic.png', 'estadios/Athletic.jpg', 'camisetas_local/camisetalocalAthletic.jpg', 'camisetas_visitante/camisetavisitanteAthletic.jpg');
+INSERT INTO Equipos (nombre, estadio, imagen_escudo, imagen_estadio, imagen_camiseta_local, imagen_camiseta_visitante) VALUES ('Atlmadrid', 'Cívitas Metropolitano', 'escudos/atlmadrid.png', 'estadios/AtleticoMadrid.jpg', 'camisetas_local/camisetalocalAtleticodeMadrid.jpg', 'camisetas_visitante/camisetavisitanteAtleticodeMadrid.jpg');
+INSERT INTO Equipos (nombre, estadio, imagen_escudo, imagen_estadio, imagen_camiseta_local, imagen_camiseta_visitante) VALUES ('Barcelona', 'Spotify Camp Nou', 'escudos/barcelona.png', 'estadios/Barsa.jpg', 'camisetas_local/camisetalocalBarcelona.jpg', 'camisetas_visitante/camisetavisitanteBarcelona.jpg');
+INSERT INTO Equipos (nombre, estadio, imagen_escudo, imagen_estadio, imagen_camiseta_local, imagen_camiseta_visitante) VALUES ('Betis', 'Benito Villamarín', 'escudos/betis.png', 'estadios/Betis.jpg', 'camisetas_local/camisetalocalBetis.jpg', 'camisetas_visitante/camisetavisitanteBetis.jpg');
+INSERT INTO Equipos (nombre, estadio, imagen_escudo, imagen_estadio, imagen_camiseta_local, imagen_camiseta_visitante) VALUES ('Celta', 'Abanca-Balaídos', 'escudos/celta.png', 'estadios/Celta.jpg', 'camisetas_local/camisetalocalCelta.jpg', 'camisetas_visitante/camisetavisitanteCelta.jpg');
+INSERT INTO Equipos (nombre, estadio, imagen_escudo, imagen_estadio, imagen_camiseta_local, imagen_camiseta_visitante) VALUES ('Espanyol', 'RCDE Stadium', 'escudos/espanyol.png', 'estadios/Espanyol.jpg', 'camisetas_local/camisetalocalEspanyol.jpg', 'camisetas_visitante/camisetavisitanteEspanyol.jpg');
+INSERT INTO Equipos (nombre, estadio, imagen_escudo, imagen_estadio, imagen_camiseta_local, imagen_camiseta_visitante) VALUES ('Getafe', 'Coliseum Alfonso Pérez', 'escudos/getafe.png', 'estadios/Getafe.jpg', 'camisetas_local/camisetalocalGetafe.jpg', 'camisetas_visitante/camisetavisitanteGetafe.jpg');
+INSERT INTO Equipos (nombre, estadio, imagen_escudo, imagen_estadio, imagen_camiseta_local, imagen_camiseta_visitante) VALUES ('Girona', 'Montilivi', 'escudos/girona.png', 'estadios/Girona.jpg', 'camisetas_local/camisetalocalGirona.jpg', 'camisetas_visitante/camisetavisitanteGirona.jpg');
+INSERT INTO Equipos (nombre, estadio, imagen_escudo, imagen_estadio, imagen_camiseta_local, imagen_camiseta_visitante) VALUES ('Leganes', 'Estadio Municipal de Butarque', 'escudos/leganes.png', 'estadios/Leganes.jpg', 'camisetas_local/camisetalocalLeganes.jpg', 'camisetas_visitante/camisetavisitanteLeganes.jpg');
+INSERT INTO Equipos (nombre, estadio, imagen_escudo, imagen_estadio, imagen_camiseta_local, imagen_camiseta_visitante) VALUES ('Mallorca', 'Visit Mallorca Estadi', 'escudos/mallorca.png', 'estadios/Mallorca.jpg', 'camisetas_local/camisetalocalMallorca.jpg', 'camisetas_visitante/camisetavisitanteMallorca.jpg');
+INSERT INTO Equipos (nombre, estadio, imagen_escudo, imagen_estadio, imagen_camiseta_local, imagen_camiseta_visitante) VALUES ('Osasuna', 'El Sadar', 'escudos/osasuna.png', 'estadios/Osasuna.jpg', 'camisetas_local/camisetalocalOsasuna.jpg', 'camisetas_visitante/camisetavisitanteOsasuna.jpg');
+INSERT INTO Equipos (nombre, estadio, imagen_escudo, imagen_estadio, imagen_camiseta_local, imagen_camiseta_visitante) VALUES ('Rayovallecano', 'Estadio de Vallecas', 'escudos/rayovallecano.png', 'estadios/RayoVallecano.jpg', 'camisetas_local/camisetalocalRayoVallecano.jpg', 'camisetas_visitante/camisetavisitanteRayoVallecano.jpg');
+INSERT INTO Equipos (nombre, estadio, imagen_escudo, imagen_estadio, imagen_camiseta_local, imagen_camiseta_visitante) VALUES ('Realmadrid', 'Santiago Bernabéu', 'escudos/realmadrid.png', 'estadios/Madrid.jpg', 'camisetas_local/camisetalocalRealMadrid.jpg', 'camisetas_visitante/camisetavisitanteRealMadrid.jpg');
+INSERT INTO Equipos (nombre, estadio, imagen_escudo, imagen_estadio, imagen_camiseta_local, imagen_camiseta_visitante) VALUES ('Realsociedad', 'Reale Arena', 'escudos/realsociedad.png', 'estadios/RealSociedad.jpg', 'camisetas_local/camisetalocalRealSociedad.jpg', 'camisetas_visitante/camisetavisitanteRealSociedad.jpg');
+INSERT INTO Equipos (nombre, estadio, imagen_escudo, imagen_estadio, imagen_camiseta_local, imagen_camiseta_visitante) VALUES ('Sevilla', 'Ramón Sánchez-Pizjuán', 'escudos/sevilla.png', 'estadios/Sevilla.jpg', 'camisetas_local/camisetalocalSevilla.jpg', 'camisetas_visitante/camisetavisitanteSevilla.jpg');
+INSERT INTO Equipos (nombre, estadio, imagen_escudo, imagen_estadio, imagen_camiseta_local, imagen_camiseta_visitante) VALUES ('Udlaspalmas', 'Estadio de Gran Canaria', 'escudos/udlaspalmas.png', 'estadios/GranCanarias.jpg', 'camisetas_local/camisetalocalUDLasPalmas.jpg', 'camisetas_visitante/camisetavisitanteUDLasPalmas.jpg');
+INSERT INTO Equipos (nombre, estadio, imagen_escudo, imagen_estadio, imagen_camiseta_local, imagen_camiseta_visitante) VALUES ('Valencia', 'Mestalla', 'escudos/valencia.png', 'estadios/Valencia.jpg', 'camisetas_local/camisetalocalValencia.jpg', 'camisetas_visitante/camisetavisitanteValencia.jpg');
+INSERT INTO Equipos (nombre, estadio, imagen_escudo, imagen_estadio, imagen_camiseta_local, imagen_camiseta_visitante) VALUES ('Valladolid', 'Estadio José Zorrilla', 'escudos/valladolid.png', 'estadios/Valladolid.jpg', 'camisetas_local/camisetalocalValladolid.jpg', 'camisetas_visitante/camisetavisitanteValladolid.jpg');
+INSERT INTO Equipos (nombre, estadio, imagen_escudo, imagen_estadio, imagen_camiseta_local, imagen_camiseta_visitante) VALUES ('Villarreal', 'Estadio de la Cerámica', 'escudos/villarreal.png', 'estadios/Villarreal.jpg', 'camisetas_local/camisetalocalVillarreal.jpg', 'camisetas_visitante/camisetavisitanteVillarreal.jpg');
 
-INSERT INTO Equipos (nombre, estadio, imagen_escudo, imagen_estadio, imagen_plantilla, imagen_camiseta_local, imagen_camiseta_visitante)
-VALUES ('Athletic', 'San Mamés', 'escudos/athletic.png', 'estadios/athletic.jpg', 'plantillas/athletic.jpg', 'camisetas/athletic_local.jpg', 'camisetas/athletic_visitante.jpg');
+-- Nuevos partidos
+INSERT INTO Partidos (fecha) VALUES
+('2025-05-21'), -- Partido 2
+('2025-05-22'), -- Partido 3
+('2025-05-23'), -- Partido 4
+('2025-05-24'), -- Partido 5
+('2025-05-25'); -- Partido 6
 
-INSERT INTO Equipos (nombre, estadio, imagen_escudo, imagen_estadio, imagen_plantilla, imagen_camiseta_local, imagen_camiseta_visitante)
-VALUES ('Atlmadrid', 'Cívitas Metropolitano', 'escudos/atlmadrid.png', 'estadios/atlmadrid.jpg', 'plantillas/atlmadrid.jpg', 'camisetas/atlmadrid_local.jpg', 'camisetas/atlmadrid_visitante.jpg');
+-- Relación Juegan (id_partido, id_equipo, goles)
+-- Partido 2: Betis vs Sevilla
+INSERT INTO Juegan (id_partido, id_equipo, goles) VALUES
+(2, 5, 1),
+(2, 16, 1);
 
-INSERT INTO Equipos (nombre, estadio, imagen_escudo, imagen_estadio, imagen_plantilla, imagen_camiseta_local, imagen_camiseta_visitante)
-VALUES ('Barcelona', 'Spotify Camp Nou', 'escudos/barcelona.png', 'estadios/barcelona.jpg', 'plantillas/barcelona.jpg', 'camisetas/barcelona_local.jpg', 'camisetas/barcelona_visitante.jpg');
+-- Partido 3: Valencia vs Villarreal
+INSERT INTO Juegan (id_partido, id_equipo, goles) VALUES
+(3, 18, 2),
+(3, 20, 2);
 
-INSERT INTO Equipos (nombre, estadio, imagen_escudo, imagen_estadio, imagen_plantilla, imagen_camiseta_local, imagen_camiseta_visitante)
-VALUES ('Betis', 'Benito Villamarín', 'escudos/betis.png', 'estadios/betis.jpg', 'plantillas/betis.jpg', 'camisetas/betis_local.jpg', 'camisetas/betis_visitante.jpg');
+-- Partido 4: Athletic vs Osasuna
+INSERT INTO Juegan (id_partido, id_equipo, goles) VALUES
+(4, 2, 3),
+(4, 12, 0);
 
-INSERT INTO Equipos (nombre, estadio, imagen_escudo, imagen_estadio, imagen_plantilla, imagen_camiseta_local, imagen_camiseta_visitante)
-VALUES ('Celta', 'Abanca-Balaídos', 'escudos/celta.png', 'estadios/celta.jpg', 'plantillas/celta.jpg', 'camisetas/celta_local.jpg', 'camisetas/celta_visitante.jpg');
+-- Partido 5: Atlético de Madrid vs Getafe
+INSERT INTO Juegan (id_partido, id_equipo, goles) VALUES
+(5, 3, 2),
+(5, 8, 1);
 
-INSERT INTO Equipos (nombre, estadio, imagen_escudo, imagen_estadio, imagen_plantilla, imagen_camiseta_local, imagen_camiseta_visitante)
-VALUES ('Espanyol', 'RCDE Stadium', 'escudos/espanyol.png', 'estadios/espanyol.jpg', 'plantillas/espanyol.jpg', 'camisetas/espanyol_local.jpg', 'camisetas/espanyol_visitante.jpg');
-
-INSERT INTO Equipos (nombre, estadio, imagen_escudo, imagen_estadio, imagen_plantilla, imagen_camiseta_local, imagen_camiseta_visitante)
-VALUES ('Getafe', 'Coliseum Alfonso Pérez', 'escudos/getafe.png', 'estadios/getafe.jpg', 'plantillas/getafe.jpg', 'camisetas/getafe_local.jpg', 'camisetas/getafe_visitante.jpg');
-
-INSERT INTO Equipos (nombre, estadio, imagen_escudo, imagen_estadio, imagen_plantilla, imagen_camiseta_local, imagen_camiseta_visitante)
-VALUES ('Girona', 'Montilivi', 'escudos/girona.png', 'estadios/girona.jpg', 'plantillas/girona.jpg', 'camisetas/girona_local.jpg', 'camisetas/girona_visitante.jpg');
-
-INSERT INTO Equipos (nombre, estadio, imagen_escudo, imagen_estadio, imagen_plantilla, imagen_camiseta_local, imagen_camiseta_visitante)
-VALUES ('Leganes', 'Estadio Municipal de Butarque', 'escudos/leganes.png', 'estadios/leganes.jpg', 'plantillas/leganes.jpg', 'camisetas/leganes_local.jpg', 'camisetas/leganes_visitante.jpg');
-
-INSERT INTO Equipos (nombre, estadio, imagen_escudo, imagen_estadio, imagen_plantilla, imagen_camiseta_local, imagen_camiseta_visitante)
-VALUES ('Mallorca', 'Visit Mallorca Estadi', 'escudos/mallorca.png', 'estadios/mallorca.jpg', 'plantillas/mallorca.jpg', 'camisetas/mallorca_local.jpg', 'camisetas/mallorca_visitante.jpg');
-
-INSERT INTO Equipos (nombre, estadio, imagen_escudo, imagen_estadio, imagen_plantilla, imagen_camiseta_local, imagen_camiseta_visitante)
-VALUES ('Osasuna', 'El Sadar', 'escudos/osasuna.png', 'estadios/osasuna.jpg', 'plantillas/osasuna.jpg', 'camisetas/osasuna_local.jpg', 'camisetas/osasuna_visitante.jpg');
-
-INSERT INTO Equipos (nombre, estadio, imagen_escudo, imagen_estadio, imagen_plantilla, imagen_camiseta_local, imagen_camiseta_visitante)
-VALUES ('Rayovallecano', 'Estadio de Vallecas', 'escudos/rayovallecano.png', 'estadios/rayovallecano.jpg', 'plantillas/rayovallecano.jpg', 'camisetas/rayovallecano_local.jpg', 'camisetas/rayovallecano_visitante.jpg');
-
-INSERT INTO Equipos (nombre, estadio, imagen_escudo, imagen_estadio, imagen_plantilla, imagen_camiseta_local, imagen_camiseta_visitante)
-VALUES ('Realmadrid', 'Santiago Bernabéu', 'escudos/realmadrid.png', 'estadios/realmadrid.jpg', 'plantillas/realmadrid.jpg', 'camisetas/realmadrid_local.jpg', 'camisetas/realmadrid_visitante.jpg');
-
-INSERT INTO Equipos (nombre, estadio, imagen_escudo, imagen_estadio, imagen_plantilla, imagen_camiseta_local, imagen_camiseta_visitante)
-VALUES ('Realsociedad', 'Reale Arena', 'escudos/realsociedad.png', 'estadios/realsociedad.jpg', 'plantillas/realsociedad.jpg', 'camisetas/realsociedad_local.jpg', 'camisetas/realsociedad_visitante.jpg');
-
-INSERT INTO Equipos (nombre, estadio, imagen_escudo, imagen_estadio, imagen_plantilla, imagen_camiseta_local, imagen_camiseta_visitante)
-VALUES ('Sevilla', 'Ramón Sánchez-Pizjuán', 'escudos/sevilla.png', 'estadios/sevilla.jpg', 'plantillas/sevilla.jpg', 'camisetas/sevilla_local.jpg', 'camisetas/sevilla_visitante.jpg');
-
-INSERT INTO Equipos (nombre, estadio, imagen_escudo, imagen_estadio, imagen_plantilla, imagen_camiseta_local, imagen_camiseta_visitante)
-VALUES ('Udlaspalmas', 'Estadio de Gran Canaria', 'escudos/udlaspalmas.png', 'estadios/udlaspalmas.jpg', 'plantillas/udlaspalmas.jpg', 'camisetas/udlaspalmas_local.jpg', 'camisetas/udlaspalmas_visitante.jpg');
-
-INSERT INTO Equipos (nombre, estadio, imagen_escudo, imagen_estadio, imagen_plantilla, imagen_camiseta_local, imagen_camiseta_visitante)
-VALUES ('Valencia', 'Mestalla', 'escudos/valencia.png', 'estadios/valencia.jpg', 'plantillas/valencia.jpg', 'camisetas/valencia_local.jpg', 'camisetas/valencia_visitante.jpg');
-
-INSERT INTO Equipos (nombre, estadio, imagen_escudo, imagen_estadio, imagen_plantilla, imagen_camiseta_local, imagen_camiseta_visitante)
-VALUES ('Valladolid', 'Estadio José Zorrilla', 'escudos/valladolid.png', 'estadios/valladolid.jpg', 'plantillas/valladolid.jpg', 'camisetas/valladolid_local.jpg', 'camisetas/valladolid_visitante.jpg');
-
-INSERT INTO Equipos (nombre, estadio, imagen_escudo, imagen_estadio, imagen_plantilla, imagen_camiseta_local, imagen_camiseta_visitante)
-VALUES ('Villarreal', 'Estadio de la Cerámica', 'escudos/villarreal.png', 'estadios/villarreal.jpg', 'plantillas/villarreal.jpg', 'camisetas/villarreal_local.jpg', 'camisetas/villarreal_visitante.jpg');
--- Insertar partido
-INSERT INTO Partidos (fecha)
-VALUES
-('2025-05-20');
-
--- Insertar relación juegan (partido y goles)
-INSERT INTO Juegan (id_partido, id_equipo, goles)
-VALUES
-(1, 1, 2),  -- Real Madrid marcó 2 goles
-(1, 2, 1);  -- Barcelona marcó 1 gol
-
+-- Partido 6: Girona vs Celta
+INSERT INTO Juegan (id_partido, id_equipo, goles) VALUES
+(6, 9, 1),
+(6, 6, 3);
 -- Insertar usuarios
 INSERT INTO Usuarios (email, password, puntos)
 VALUES
-('usuario1@email.com', '1234', 1000),
-('usuario2@email.com', 'abcd', 800);
+    ('usuario1@email.com', '1234', 1000),
+    ('usuario2@email.com', 'abcd', 800);
 
 -- Insertar apuestas
 INSERT INTO Apuestas (id_partido, id_usuario, puntos_apostados)
 VALUES
-(1, 1, 100),
-(1, 2, 200);
+    (1, 1, 100),
+    (1, 2, 200);
 
 -- Insertar detalles de apuestas
 INSERT INTO Apuestas_Detalle (id_partido, id_usuario, id_equipo, goles_apostados)
 VALUES
-(1, 1, 1, 2), -- Usuario 1 apuesta que Real Madrid mete 2 goles
-(1, 1, 2, 1), -- Usuario 1 apuesta que Barcelona mete 1 gol
-(1, 2, 1, 3), -- Usuario 2 apuesta que Real Madrid mete 3 goles
-(1, 2, 2, 2); -- Usuario 2 apuesta que Barcelona mete 2 goles
+    (1, 1, 1, 2), -- Usuario 1 apuesta que Real Madrid mete 2 goles
+    (1, 1, 2, 1), -- Usuario 1 apuesta que Barcelona mete 1 gol
+    (1, 2, 1, 3), -- Usuario 2 apuesta que Real Madrid mete 3 goles
+    (1, 2, 2, 2); -- Usuario 2 apuesta que Barcelona mete 2 goles
 
 
 
