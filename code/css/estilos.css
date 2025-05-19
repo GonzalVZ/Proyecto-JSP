@@ -7,7 +7,7 @@ html, body {
 .layout {
   display: grid;
   grid-template-rows: 1fr 5fr 1fr;
-  grid-template-columns: 1fr 2fr 1fr ;
+  grid-template-columns: 1fr 3fr 1fr ;
   min-height: 100vh;
   background-color: #232931;
   color: white;
@@ -25,36 +25,30 @@ html, body {
 }
 
 .contenido{
-    position: relative;
     grid-row-start: 2;
     grid-row-end: 3;
     grid-column-start: 2;
     grid-column-end: 3;
 
+
+
+}
+
+.contenido form {
     display: grid;
-    grid-template-columns: repeat(4,1fr);
-    grid-template-rows: repeat(4,1fr);
+    grid-template-columns: 1fr 1fr;
+
 
 }
 
-.contenido::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 50%;
-  width: 1px;
-  background-color: #393F46; 
-  transform: translateX(-50%);
-}
+
 
 .contenido div{
-    border-top: 1px solid #393F46;
-    border-bottom: 1px solid #393F46;
+
+    border: 1px solid #393F46;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    align-items: center
 }
 
 .footer {
@@ -70,7 +64,20 @@ html, body {
 }
 
 .goles{
+    width: 40px;
+}
+.boton {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    height: 100px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+}
 
-  width: 40px;
+.boton input{
+    width: 70px;
+    height: 60px;
+    box-sizing:  border-box;
 }
 

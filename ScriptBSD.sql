@@ -94,26 +94,34 @@ INSERT INTO juegan (id_partido, id_equipo, goles) VALUES
                                                       (5, 3, 2), (5, 8, 1), -- Atlmadrid vs Getafe
                                                       (6, 9, 1), (6, 6, 3); -- Girona vs Celta
 
--- Insertar usuarios
+-- Insertar 20 usuarios
 INSERT INTO usuarios (email, password, puntos) VALUES
                                                    ('usuario1@email.com', '1234', 1000),
-                                                   ('usuario2@email.com', 'abcd', 800);
-
--- Insertar apuestas
-INSERT INTO apuestas (id_partido, id_usuario, puntos_apostados) VALUES
-                                                                    (1, 1, 100),
-                                                                    (1, 2, 200);
-
--- Insertar apuestas_detalle
-INSERT INTO apuestas_detalle (id_partido, id_usuario, id_equipo, goles_apostados) VALUES
-                                                                                      (1, 1, 1, 2),
-                                                                                      (1, 1, 2, 1),
-                                                                                      (1, 2, 1, 3),
-                                                                                      (1, 2, 2, 2);
-
+                                                   ('usuario2@email.com', 'abcd', 800),
+                                                   ('usuario3@email.com', 'pass3', 750),
+                                                   ('usuario4@email.com', 'pass4', 950),
+                                                   ('usuario5@email.com', 'clave5', 600),
+                                                   ('usuario6@email.com', 'clave6', 850),
+                                                   ('usuario7@email.com', 'admin', 1200),
+                                                   ('usuario8@email.com', 'qwerty', 500),
+                                                   ('usuario9@email.com', 'asdf', 400),
+                                                   ('usuario10@email.com', 'zxcv', 300),
+                                                   ('usuario11@email.com', '0000', 100),
+                                                   ('usuario12@email.com', '123abc', 900),
+                                                   ('usuario13@email.com', 'miPass13', 1300),
+                                                   ('usuario14@email.com', 'clave14', 800),
+                                                   ('usuario15@email.com', 'clave15', 700),
+                                                   ('usuario16@email.com', '16pass', 950),
+                                                   ('usuario17@email.com', '17clave', 650),
+                                                   ('usuario18@email.com', 'pass18', 1100),
+                                                   ('usuario19@email.com', 'abc123', 980),
+                                                   ('usuario20@email.com', 'p@ssword', 770);
 
 
 SELECT equipos.imagen_escudo
 FROM equipos
          INNER JOIN juegan ON equipos.id_equipo = juegan.id_equipo INNER JOIN partidos ON juegan.id_partido = partidos.id_partido ORDER BY partidos.fecha ASC;
 
+SELECT * FROM apuestas_detalle;
+SELECT * FROM apuestas;
+SELECT * FROM usuarios;
