@@ -16,8 +16,7 @@
                 <%
                     String goles[] = request.getParameterValues("goles");
                     String idPartido[] = request.getParameterValues("idPartido");
-
-                    out.println("Apuesta guardada con éxito");
+                    response.sendRedirect("index.jsp?do=user/getAll");
                 %>        
 
         </body>
