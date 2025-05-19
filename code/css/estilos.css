@@ -52,7 +52,8 @@ html, body {
     border-top: 1px solid #393F46;
     border-bottom: 1px solid #393F46;
     display: flex;
-    justify-content: space-around;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
 }
 
@@ -66,5 +67,10 @@ html, body {
   justify-content: center;
   align-items: center;
 
+}
+
+.goles{
+
+  width: 40px;
 }
 
