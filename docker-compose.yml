@@ -1,0 +1,36 @@
+version: "3.8"
+
+services:
+  mysql:
+    image: docker.io/bitnami/mysql:8.4
+    ports:
+      - "3302:3306"
+    volumes:
+      - "mysql_data:/bitnami/mysql/data"
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - MYSQL_DATABASE=web_futbol
+
+    healthcheck:
+      test: ["CMD", "/opt/bitnami/scripts/mysql/healthcheck.sh"]
+      interval: 15s
+      timeout: 5s
+      retries: 6
+
+  tomcat:
+    image: docker.io/bitnami/tomcat:10.1
+    ports:
+      - "8080:8080"
+    volumes:
+      - "./code:/bitnami/tomcat/webapps/ROOT"
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - TOMCAT_USERNAME=root
+      - TOMCAT_PASSWORD=root
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+volumes:
+  mysql_data:
+    driver: local
