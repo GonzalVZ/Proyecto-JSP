@@ -1,74 +1,72 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
     <%@ page import="java.sql.*" %>
-
+    
         <!DOCTYPE html>
         <html lang="es">
 
         <head>
             <meta charset="UTF-8" />
             <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-            <title>Mi Web</title>
             <link rel="stylesheet" href="css/estilos.css">
 
+            <title>Mi Web</title>
+            
         </head>
 
         <body>
+            <h1>Esta es la cabecera</h1>
+            <h3>Menú principal</h3>
+            <p><a href='index.jsp?accion=mostrarListaEquipos'>Ver equipos</a> | <a href='index.jsp?accion=mostrarListaUsuarios'>Ver usuarios</a> | <a href='index.jsp?accion=mostrarListaPardios'>Ver partidos</a></p>
 
-            <section class="layout">
-                <header class="menu"></header>
+<%
+    // Averiguamos qué hay que hacer ahora
+    String accion = request.getParameter("accion");
+    if ((accion == "") || (accion == null)) {
+        accion = "mostrarListaEquipos";
+    }
 
-                <main class="contenido">
-                    <form action="procesarApuesta.jsp" method="get" >
-                        <%
-                            Connection conn = null;
-                            Statement st = null;
-                            ResultSet rs = null;
-                            try {
-                                Class.forName("com.mysql.cj.jdbc.Driver");
-                                conn = DriverManager.getConnection("jdbc:mysql://mysql:3306/web_futbol", "root", "");
+    switch(accion) {
 
-                                String query = "SELECT partidos.id_partido, equipos.imagen_escudo, equipos.id_equipo " +
-                                        "FROM equipos " +
-                                        "INNER JOIN juegan ON equipos.id_equipo = juegan.id_equipo " +
-                                        "INNER JOIN partidos ON juegan.id_partido = partidos.id_partido " +
-                                        "ORDER BY partidos.fecha ASC";
-                                st = conn.createStatement();
-                                rs = st.executeQuery(query);
+        case "mostrarListaEquipos":
+            List<Equipo> lista = Equipo.getAll();
+            Request.setAttribute("lista", lista);  
+            %><jsp:include page="vistas/listaEquipos.jsp" /><%
+            break;
 
-                                while (rs.next()) {
-                                    String imagen_escudo = rs.getString("imagen_escudo");
-                                    String id_partido = rs.getString("id_partido");
-                                    String id_equipo = rs.getString("id_equipo");
-                        %>
-                        <div>
-                            <img src="<%= imagen_escudo %>" alt="escudo" width="100px" />
-                            <input type="hidden" name="idPartido" value="<%= id_partido %>"/>
-                            <input type="hidden" name="idEquipo" value="<%= id_equipo %>"/>
-                            <input type="number" name="goles" class="goles" >
-                        </div>
-                        <%
-                            }
-                        %>
-                        <div class="boton">
-                        <input type="submit" value="Enviar" >
-                        </div>
-                        <%
-                            } catch (Exception e) {
-                                out.println("Error al acceder a la BD: " + e.toString());
-                            } finally {
-                                if (rs != null) rs.close();
-                                if (st != null) st.close();
-                                if (conn != null) conn.close();
-                            }
-                        %>
-                    </form>
-                </main>
+        case "formEquipoNuevo":
+            %><jsp:include page="vistas/formularioEquipoNuevo.jsp" /><%
+            break;
+
+        case "mostrarListaUsuarios":
+
+            break;
+/*
+        case "mostrarListaPartidos":
+                out.println("Estoy en mistrarListaPartids");
+                // Mostrar la lista de partidos
+
+                // 1. Recuperar los datos de la base de datos (modelo)
+                List<Partido> listaPartidos = Partido.getAll();
+                // 2. Generar HTML con esos datos (vista)
+                include("listaPartidos.jsp");
+                break;
+
+        case "procesarApuesta":
+                 String goles[] = request.getParameterValues("goles");
+                 String[] idPartidoArray = request.getParameterValues("idPartido");
+                 Set<String> idPartidoSet = new HashSet<>(Arrays.asList(idPartidoArray));
+
+                String idEquipo[] = request.getParameterValues("idEquipo");
+                Partido.guardarApuesta(goles, idPartidoArray, idPartidoSet);
+
+*/
+    } // switch
 
 
-                <footer class=" footer">
-                            <p>&copy; 2025 Jesus. Todos los derechos reservados.</p>
-                            </footer>
-            </section>
+%>
+
+
+        <div>Esto es el pie de todas las páginas</div>
         </body>
 
         </html>
