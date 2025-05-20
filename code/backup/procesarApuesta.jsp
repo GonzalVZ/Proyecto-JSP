@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
 <%@ page import="java.sql.*" %>
-<%@ page import="java.util.Set" %>
-<%@ page import="java.util.HashSet" %>
-<%@ page import="java.util.Arrays" %>
+<%@ page import="java.util.*" %>
+
 
 <!DOCTYPE html>
 <html lang="es">
