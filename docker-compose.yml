@@ -16,7 +16,7 @@ services:
   mysql:
     image: docker.io/bitnami/mysql:8.4
     ports:
-      - "3306:3306"
+      - "3302:3306"
     volumes:
       - "mysql_data:/bitnami/mysql/data"
     environment:

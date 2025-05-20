@@ -1,43 +1,57 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
     <%@ page import="java.sql.*" %>
-    
-        <!DOCTYPE html>
+    <%@ page import="java.util.*"%>
+<%@ page import="modelos.Equipo" %>
+
+
+
+<!DOCTYPE html>
         <html lang="es">
 
         <head>
             <meta charset="UTF-8" />
             <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-            <link rel="stylesheet" href="css/estilos.css">
 
             <title>Mi Web</title>
-            
+
         </head>
 
         <body>
             <h1>Esta es la cabecera</h1>
             <h3>Menú principal</h3>
-            <p><a href='index.jsp?accion=mostrarListaEquipos'>Ver equipos</a> | <a href='index.jsp?accion=mostrarListaUsuarios'>Ver usuarios</a> | <a href='index.jsp?accion=mostrarListaPardios'>Ver partidos</a></p>
+            <p><a href='index.jsp?accion=mostrarListaEquipos'>Ver equipos</a> | <a href='index.jsp?accion=formEquipoNuevo'>Nuevo Equipo</a> | <a href='index.jsp?accion=mostrarListaPardios'>Ver partidos</a></p>
 
 <%
     // Averiguamos qué hay que hacer ahora
     String accion = request.getParameter("accion");
     if ((accion == "") || (accion == null)) {
         accion = "mostrarListaEquipos";
+    }else if(accion.equals("insertarEquipo")){
+      accion = "insertarEquipo";
     }
-
     switch(accion) {
 
         case "mostrarListaEquipos":
             List<Equipo> lista = Equipo.getAll();
-            Request.setAttribute("lista", lista);  
-            %><jsp:include page="vistas/listaEquipos.jsp" /><%
+            request.setAttribute("lista", lista);
+           %><jsp:include page="vistas/listaEquipos.jsp" /><%
             break;
 
         case "formEquipoNuevo":
-            %><jsp:include page="vistas/formularioEquipoNuevo.jsp" /><%
+
+            %><jsp:include page="vistas/equipoNuevo.jsp" /><%
+
             break;
 
-        case "mostrarListaUsuarios":
+        case "insertarEquipo":
+
+        String datos[] = request.getParameterValues("datos");
+
+            Equipo.meterEquipo(datos);
+            
+    response.sendRedirect("index.jsp?accion=mostrarListaEquipos");
+
+
 
             break;
 /*
