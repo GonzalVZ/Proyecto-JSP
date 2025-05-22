@@ -19,8 +19,15 @@
         <body>
             <h1>Esta es la cabecera</h1>
             <h3>Menú principal</h3>
-            <p><a href='index.jsp?accion=mostrarListaEquipos'>Ver equipos</a> | <a href='index.jsp?accion=formEquipoNuevo'>Nuevo Equipo</a> | <a href='index.jsp?accion=mostrarListaPardios'>Ver partidos</a></p>
+            <p><a href='index.jsp?accion=mostrarListaEquipos'>Ver equipos</a> | <a href='index.jsp?accion=formEquipoNuevo'>Nuevo Equipo</a> </p>
+            <p>Buscar Equipo</p>
+            <form action="index.jsp" method="get">
 
+            <input type="text" name="nombreEquipo" >
+            <input type="hidden" name="accion" value="mostrarEquipoPorNombre">
+
+            <input type="submit" value="Buscar">
+            </form>
 <%
     // Averiguamos qué hay que hacer ahora
     String accion = request.getParameter("accion");
@@ -28,7 +35,11 @@
         accion = "mostrarListaEquipos";
     }else if(accion.equals("insertarEquipo")){
       accion = "insertarEquipo";
-    }
+    }else if (accion.equals("modificarEquipo")){
+        accion = "modificarEquipo";    
+}
+    
+
     switch(accion) {
 
         case "mostrarListaEquipos":
@@ -49,32 +60,53 @@
 
             Equipo.meterEquipo(datos);
             
-    response.sendRedirect("index.jsp?accion=mostrarListaEquipos");
+        response.sendRedirect("index.jsp?accion=mostrarListaEquipos");
 
 
 
             break;
-/*
-        case "mostrarListaPartidos":
-                out.println("Estoy en mistrarListaPartids");
-                // Mostrar la lista de partidos
 
-                // 1. Recuperar los datos de la base de datos (modelo)
-                List<Partido> listaPartidos = Partido.getAll();
-                // 2. Generar HTML con esos datos (vista)
-                include("listaPartidos.jsp");
-                break;
+        case "eliminarEquipo":
 
-        case "procesarApuesta":
-                 String goles[] = request.getParameterValues("goles");
-                 String[] idPartidoArray = request.getParameterValues("idPartido");
-                 Set<String> idPartidoSet = new HashSet<>(Arrays.asList(idPartidoArray));
+        %><jsp:include page="vistas/eliminarEquipo.jsp" /><%
 
-                String idEquipo[] = request.getParameterValues("idEquipo");
-                Partido.guardarApuesta(goles, idPartidoArray, idPartidoSet);
+        response.sendRedirect("index.jsp?accion=mostrarListaEquipos");
 
-*/
-    } // switch
+
+        case "mostrarEquipoPorId":
+
+        String id = request.getParameter("id");
+
+       List<Equipo> equipoEncontradoPorId = Equipo.mostrarEquipoPorId(id);
+
+        request.setAttribute("equipoEncontradoPorId", equipoEncontradoPorId);
+
+
+
+        %><jsp:include page="vistas/mostrarEquipoPorId.jsp" /><%
+
+        break;
+
+        case "modificarEquipo":
+
+        String[] recogerDatos = request.getParameterValues("datos");
+
+        Equipo.modificarEquipo(recogerDatos);
+
+
+        response.sendRedirect("index.jsp?accion=mostrarListaEquipos");
+
+        case "mostrarEquipoPorNombre":
+
+          String nombreEquipo =  request.getParameter("nombreEquipo");
+
+         List<Equipo> equipoEncontradoPorNombre = Equipo.mostrarEquipoPorNombre(nombreEquipo);
+
+        request.setAttribute("equipoEncontradoPorNombre", equipoEncontradoPorNombre);
+
+        %><jsp:include page="vistas/mostrarEquipoPorNombre.jsp" /><%
+
+    }
 
 
 %>

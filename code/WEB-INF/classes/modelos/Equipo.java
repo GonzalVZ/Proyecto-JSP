@@ -99,6 +99,158 @@ public class Equipo {
         }
     }
 
+    public static void eliminarEquipo(String id) {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            conn = DriverManager.getConnection("jdbc:mysql://mysql:3306/web_futbol", "root", "");
+
+            String query = "DELETE FROM equipos WHERE id_equipo = ?";
+            ps = conn.prepareStatement(query);
+            ps.setString(1, id);
+            int filasAfectadas = ps.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (ps != null)
+                    ps.close();
+                if (conn != null)
+                    conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public static List<Equipo> mostrarEquipoPorId(String id) {
+        List<Equipo> unEquipo = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            conn = DriverManager.getConnection("jdbc:mysql://mysql:3306/web_futbol", "root", "");
+
+            String query = "SELECT * FROM equipos WHERE id_equipo = ?";
+            ps = conn.prepareStatement(query);
+            ps.setString(1, id);
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                Equipo equipo = new Equipo(
+                        rs.getInt("id_equipo"),
+                        rs.getString("nombre"),
+                        rs.getString("estadio"),
+                        rs.getString("imagen_escudo"),
+                        rs.getString("imagen_estadio"),
+                        rs.getString("imagen_camiseta_local"),
+                        rs.getString("imagen_camiseta_visitante"));
+                unEquipo.add(equipo);
+            }
+
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null)
+                    rs.close();
+                if (ps != null)
+                    ps.close();
+                if (conn != null)
+                    conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return unEquipo;
+    }
+
+    public static void modificarEquipo(String[] equipo) {
+        Connection conn = null;
+        PreparedStatement ps = null;
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            conn = DriverManager.getConnection("jdbc:mysql://mysql:3306/web_futbol", "root", "");
+
+            String query = "UPDATE equipos SET nombre = ?, estadio = ?, imagen_escudo = ?, imagen_estadio = ?, imagen_camiseta_local = ?, imagen_camiseta_visitante = ? WHERE id_equipo = ?";
+            ps = conn.prepareStatement(query);
+
+            ps.setString(1, equipo[1]);
+            ps.setString(2, equipo[2]);
+            ps.setString(3, equipo[3]);
+            ps.setString(4, equipo[4]);
+            ps.setString(5, equipo[5]);
+            ps.setString(6, equipo[6]);
+            ps.setString(7, equipo[0]);
+
+            ps.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (ps != null)
+                    ps.close();
+                if (conn != null)
+                    conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+
+    public static List<Equipo> mostrarEquipoPorNombre(String nombre) {
+        List<Equipo> unEquipo = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            conn = DriverManager.getConnection("jdbc:mysql://mysql:3306/web_futbol", "root", "");
+
+            String query = "SELECT * FROM equipos WHERE nombre = ?";
+            ps = conn.prepareStatement(query);
+            ps.setString(1, nombre);
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                Equipo equipo = new Equipo(
+                        rs.getInt("id_equipo"),
+                        rs.getString("nombre"),
+                        rs.getString("estadio"),
+                        rs.getString("imagen_escudo"),
+                        rs.getString("imagen_estadio"),
+                        rs.getString("imagen_camiseta_local"),
+                        rs.getString("imagen_camiseta_visitante"));
+                unEquipo.add(equipo);
+            }
+
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null)
+                    rs.close();
+                if (ps != null)
+                    ps.close();
+                if (conn != null)
+                    conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return unEquipo;
+    }
+
     public int getId_equipo() {
         return id_equipo;
     }

@@ -15,7 +15,7 @@ out.println("<input type='text' name='datos' >");
 
     <input type="hidden" name="accion" value="insertarEquipo">
 
- <input type="submit" value="Enviar" >
+    <input type="submit" value="Enviar" >
  
 
 </form>
