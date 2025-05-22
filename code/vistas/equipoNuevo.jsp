@@ -6,8 +6,7 @@
 <form action="index.jsp" method="get">
 <%
 for(int i = 0; i<6;i++){
-    
-out.println("<input type='text' name='datos' >");
+    out.println("<input type='text' name='datos' ><br>");
 }
 
 

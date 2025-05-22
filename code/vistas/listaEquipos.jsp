@@ -27,12 +27,11 @@
             out.println("<a href=index.jsp?accion=eliminarEquipo&id="+e.getId_equipo()+">Borrar</a>");
             out.println("<a href=index.jsp?accion=mostrarEquipoPorId&id="+e.getId_equipo()+">Modificar</a>");
 
-           out.println("<br>");
-           out.println("<br>");
+            out.println("<br>");
+            out.println("<br>");
             out.println("<br>");
         }
         
         
     }
 %>
-
