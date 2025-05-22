@@ -11,7 +11,7 @@
         <head>
             <meta charset="UTF-8" />
             <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-            <link rel="stylesheet" href="css/estilos.css">
+            <link rel="stylesheet" href="css/estilos.css?v=1">
 
             <title>Futbol</title>
 
@@ -20,8 +20,12 @@
         <body>
 
             <section class="layout"> 
-            <p><a href='index.jsp?accion=mostrarListaEquipos'>Ver equipos</a> | <a href='index.jsp?accion=formEquipoNuevo'>Nuevo Equipo</a> </p>
-            <p>Buscar Equipo</p>
+            <header class="menu">
+            <a href='index.jsp?accion=mostrarListaEquipos'>Ver equipos</a>  
+            <a href='index.jsp?accion=formEquipoNuevo'>Nuevo Equipo</a>
+            <a href='index.jsp?accion=verPartidos&apuestas=true'>Ver Partidos</a> 
+ 
+           
             <form action="index.jsp" method="get">
 
             <input type="text" name="nombreEquipo" >
@@ -29,6 +33,10 @@
 
             <input type="submit" value="Buscar">
             </form>
+
+             </header>
+
+             <main class="contenido">
 <%
     // Averiguamos qué hay que hacer ahora
     String accion = request.getParameter("accion");
@@ -84,13 +92,22 @@
             %><jsp:include page="vistas/listaEquipos.jsp" /><%
             break;
 
+        case "verPartidos":
+
+             lista = Equipo.getPartidos();
+            request.setAttribute("lista", lista);
+            %><jsp:include page="vistas/listaEquipos.jsp" /><%
+
+        break;
+
     }
 
 
 %>
+</main>
 
 
-        <div>Esto es el pie de todas las páginas</div>
+        <footer class="footer"><p>&copy; 2025 Mi Sitio Web. Todos los derechos reservados.</p></footer>
         </section>
         </body>
 

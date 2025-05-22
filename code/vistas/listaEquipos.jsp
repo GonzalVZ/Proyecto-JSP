@@ -1,35 +1,31 @@
 <%@ page import="modelos.Equipo" %>
 <%@ page import="java.util.*" %>
 
-<h3>Lista de equipos</h3>
+<h3>Jornada 1</h3>
 
 <%
     List<Equipo> lista = (List<Equipo>) request.getAttribute("lista");
+    String apuestas = request.getParameter("apuestas");
 
     if (lista == null) {
         out.println("La lista no se ha pasado correctamente (es null).");
     } else if (lista.isEmpty()) {
         out.println("La lista está vacía.");
-    } else {
+    } else if(apuestas == "apuestas"){
         for (Equipo e : lista) {
 
+            out.println("<div class='equipo'>");
+            out.println("  <div class='fondo' style=\"background-image: url('" + e.getImagen_estadio() + "'); background-size: cover; background-position: center; background-repeat: no-repeat; grid-column: 1 / 3; grid-row: 1 / 3;\"></div>");
+            out.println("  <img src='" + e.getImagen_escudo() + "' width='150'>");
+            out.println("  <input type='hidden' name='borrar' value=" + e.getId_equipo() + ">");
+            out.println("  <a href='index.jsp?accion=eliminarEquipo&id=" + e.getId_equipo() + "'>Borrar</a>");
+            out.println("  <a href='index.jsp?accion=mostrarEquipoPorId&id=" + e.getId_equipo() + "'>Modificar</a>");
+            out.println();
+            out.println("</div>");
 
-            out.println("ID: " + e.getId_equipo() + "<br>");
-            out.println("Nombre: " + e.getNombre() + "<br>");
-            out.println("Estadio: " + e.getEstadio() + "<br>");
-            out.println("Escudo: <img src='" + e.getImagen_escudo() + "' width='50'><br>");
-            out.println("Imagen Estadio: <img src='" + e.getImagen_estadio() + "' width='100'><br>");
-            out.println("Camiseta Local: <img src='" + e.getImagen_camiseta_local() + "' width='50'><br>");
-            out.println("Camiseta Visitante: <img src='" + e.getImagen_camiseta_visitante() + "' width='50'><br><hr>");
-            out.println("<input type='hidden' name='borrar' value="+e.getId_equipo()+">");
 
 
-            out.println("<a href=index.jsp?accion=eliminarEquipo&id="+e.getId_equipo()+">Borrar</a>");
-            out.println("<a href=index.jsp?accion=mostrarEquipoPorId&id="+e.getId_equipo()+">Modificar</a>");
-
-            out.println("<br>");
-            out.println("<br>");
-            out.println("<br>");
+    
         }
         
         

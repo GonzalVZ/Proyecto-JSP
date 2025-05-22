@@ -21,6 +21,6 @@ Equipo e = equipoEncontradoPorId.get(0);
 %>
 
 <input type="hidden" name="accion" value="modificarEquipo">
-<input type="submit" value="Enviar">
+<input type="submit" value="Modificar">
 
 </form>

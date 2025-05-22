@@ -251,6 +251,49 @@ public class Equipo {
         return unEquipo;
     }
 
+    public static List<Equipo> getPartidos() {
+        List<Equipo> equipos = new ArrayList<>();
+        Connection conn = null;
+        Statement st = null;
+        ResultSet rs = null;
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            conn = DriverManager.getConnection("jdbc:mysql://mysql:3306/web_futbol", "root", "");
+
+            String query = "SELECT equipos.* FROM equipos INNER JOIN juegan ON equipos.id_equipo = juegan.id_equipo INNER JOIN partidos ON juegan.id_partido = partidos.id_partido ORDER BY partidos.fecha ASC";
+            st = conn.createStatement();
+            rs = st.executeQuery(query);
+
+            while (rs.next()) {
+                Equipo equipo = new Equipo(
+                        rs.getInt("id_equipo"),
+                        rs.getString("nombre"),
+                        rs.getString("estadio"),
+                        rs.getString("imagen_escudo"),
+                        rs.getString("imagen_estadio"),
+                        rs.getString("imagen_camiseta_local"),
+                        rs.getString("imagen_camiseta_visitante"));
+                equipos.add(equipo);
+            }
+
+        } catch (SQLException | ClassNotFoundException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null)
+                    rs.close();
+                if (st != null)
+                    st.close();
+                if (conn != null)
+                    conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return equipos;
+    }
+
     public int getId_equipo() {
         return id_equipo;
     }
