@@ -127,7 +127,9 @@
 
             break;
 
-
+            default:   // ********** ACCIÓN NO ENCONTRADA *******
+                     // En caso de que no se encuentre la acción, mostramos una página de error
+             %><jsp:include page="vistas/404.jsp" /><%
 
 
 
