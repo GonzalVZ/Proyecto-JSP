@@ -1,17 +1,12 @@
 <%@ page import="modelos.Equipo" %>
 <%@ page import="java.util.*" %>
 
-<h3>Jornada 1</h3>
+<h3>LISTA DE EQUIPOS</h3>
 
 <%
     List<Equipo> lista = (List<Equipo>) request.getAttribute("lista");
-    String apuestas = request.getParameter("apuestas");
 
-    if (lista == null) {
-        out.println("La lista no se ha pasado correctamente (es null).");
-    } else if (lista.isEmpty()) {
-        out.println("La lista está vacía.");
-    } else if(apuestas == "apuestas"){
+
         for (Equipo e : lista) {
 
             out.println("<div class='equipo'>");
@@ -20,13 +15,12 @@
             out.println("  <input type='hidden' name='borrar' value=" + e.getId_equipo() + ">");
             out.println("  <a href='index.jsp?accion=eliminarEquipo&id=" + e.getId_equipo() + "'>Borrar</a>");
             out.println("  <a href='index.jsp?accion=mostrarEquipoPorId&id=" + e.getId_equipo() + "'>Modificar</a>");
-            out.println();
             out.println("</div>");
 
 
 
     
-        }
+
         
         
     }

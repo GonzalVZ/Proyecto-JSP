@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
 
 
-<h3>Formulario equipo</h3>
+<h3>FORMULARIO NUEVO EQUIPO</h3>
 
 <form action="index.jsp" method="get">
 <%

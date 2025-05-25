@@ -1,20 +1,20 @@
 html, body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
+    margin: 0;
+    padding: 0;
+    height: 100%;
 }
 
 .layout {
-  display: grid;
-  grid-template-rows: 100px auto 150px;
-  grid-template-columns: 1fr 3fr 1fr ;
-  min-height: 100vh;
-  background-color: #232931;
-  color: white;
-  font-family: sans-serif;
+    display: grid;
+    grid-template-rows: 100px auto 200px;
+    grid-template-columns: 1fr 3fr 1fr;
+    min-height: 100vh;
+    background-color: #232931;
+    color: white;
+    font-family: sans-serif;
 }
 
-.menu{
+.menu {
     background-color: #171818;
     grid-row-start: 1;
     grid-row-end: 2;
@@ -23,83 +23,140 @@ html, body {
     display: flex;
     justify-content: space-around;
     align-items: center;
-     
 }
 
 .menu a {
-    text-decoration: none;     
-    color: white;           
+    text-decoration: none;
+    color: white;
     font-size: 16px;
-
 }
 
+/* ---------------------- MODO GENERAL ---------------------- */
 
-
-
-.contenido{
+.modoGeneral .contenido {
     grid-row-start: 2;
     grid-row-end: 3;
     grid-column-start: 2;
     grid-column-end: 3;
-
     display: grid;
-
     grid-template-rows: 100px auto;
-    grid-template-columns: 1fr 1fr ;
-    
-
-
-
+    grid-template-columns: 1fr 1fr;
 }
 
-.contenido h3{
-
+.modoGeneral .contenido h3 {
     grid-column-start: 1;
     grid-column-end: 3;
-
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.equipo {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: repeat(4, 1fr);
-  
+
+.modoGeneral .equipo {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(4, 1fr);
+}
+
+.modoGeneral .equipo img {
+    grid-column: 1 / 3;
+    grid-row: 1 / 3;
+    place-self: center;
+}
+
+.modoGeneral .equipo a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+}
+
+/* ---------------------- VER PARTIDOS ---------------------- */
+
+.verPartidos .contenido {
+    grid-row-start: 2;
+    grid-row-end: 3;
+    grid-column-start: 2;
+    grid-column-end: 3;
+    display: grid;
+    grid-template-rows: 100px auto;
+    grid-template-columns: 1fr 1fr;
+}
+
+.verPartidos .contenido h3 {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.verPartidos .fomularioPartidos {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    display: grid;
+    gap: 50px;
+}
+
+.verPartidos .partido {
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr 1fr;
+    row-gap: 50px;
+}
+.verPartidos .equipo {
+    display: grid;
+
+}
+
+.verPartidos .fondo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.verPartidos .puntosygoles{
+    grid-column-start: 1;
+    grid-column-end: 3;
+    display: flex;
+    justify-content: space-around;
+}
+
+.verPartidos .puntosygoles input {
+    text-align: center;
+    width: 60px;
+    height: 30px;
 }
 
 
 
-.equipo img {
-  grid-column: 1 / 3;
-  grid-row: 1 / 3;
-  place-self: center;
 
-}
-.equipo a {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  text-decoration: none;     
-  color: white;           
-  font-size: 16px;  
-
+.verPartidos .fomularioPartidos .apuestas {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
+.verPartidos .fomularioPartidos .apuestas input {
+    text-align: center;
+    width: 80px;
+    height: 60px;
+}
 
-
+/* ---------------------- FOOTER ---------------------- */
 
 .footer {
-  background-color: #171818;
-  grid-row-start: 3;
-  grid-row-end: 4;
-  grid-column-start: 1;
-  grid-column-end: 5;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
+    background-color: #171818;
+    grid-row-start: 3;
+    grid-row-end: 4;
+    grid-column-start: 1;
+    grid-column-end: 5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
 }
-
-

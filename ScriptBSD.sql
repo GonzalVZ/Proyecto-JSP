@@ -3,53 +3,53 @@ CREATE DATABASE web_futbol CHARACTER SET utf8mb4;
 USE web_futbol;
 
 CREATE TABLE equipos (
-    id_equipo INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    nombre VARCHAR(50) NOT NULL UNIQUE,
-    estadio VARCHAR(50),
-    imagen_escudo VARCHAR(50),
-    imagen_estadio VARCHAR(50),
-    imagen_camiseta_local VARCHAR(100),
-    imagen_camiseta_visitante VARCHAR(100)
+                         id_equipo INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+                         nombre VARCHAR(50) NOT NULL UNIQUE,
+                         estadio VARCHAR(50),
+                         imagen_escudo VARCHAR(50),
+                         imagen_estadio VARCHAR(50),
+                         imagen_camiseta_local VARCHAR(100),
+                         imagen_camiseta_visitante VARCHAR(100)
 );
 
 CREATE TABLE partidos (
-    id_partido INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    fecha DATE NOT NULL
+                          id_partido INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+                          fecha DATE NOT NULL
 );
 
 CREATE TABLE juegan (
-    id_partido INT UNSIGNED,
-    id_equipo INT UNSIGNED,
-    goles INT,
-    PRIMARY KEY (id_partido, id_equipo),
-    FOREIGN KEY (id_partido) REFERENCES partidos(id_partido) ON DELETE CASCADE,
-    FOREIGN KEY (id_equipo) REFERENCES equipos(id_equipo) ON DELETE CASCADE
+                        id_partido INT UNSIGNED,
+                        id_equipo INT UNSIGNED,
+                        goles INT,
+                        PRIMARY KEY (id_partido, id_equipo),
+                        FOREIGN KEY (id_partido) REFERENCES partidos(id_partido) ON DELETE CASCADE,
+                        FOREIGN KEY (id_equipo) REFERENCES equipos(id_equipo) ON DELETE CASCADE
 );
 
 CREATE TABLE usuarios (
-    id_usuario INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    email VARCHAR(50) NOT NULL UNIQUE,
-    password VARCHAR(255) NOT NULL,
-    puntos INT DEFAULT 0
+                          id_usuario INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+                          email VARCHAR(50) NOT NULL UNIQUE,
+                          password VARCHAR(255) NOT NULL,
+                          puntos INT DEFAULT 0
 );
 
 CREATE TABLE apuestas (
-    id_partido INT UNSIGNED,
-    id_usuario INT UNSIGNED,
-    puntos_apostados INT,
-    PRIMARY KEY(id_partido, id_usuario),
-    FOREIGN KEY(id_partido) REFERENCES partidos(id_partido) ON DELETE CASCADE,
-    FOREIGN KEY(id_usuario) REFERENCES usuarios(id_usuario) ON DELETE CASCADE
+                          id_partido INT UNSIGNED,
+                          id_usuario INT UNSIGNED,
+                          puntos_apostados INT,
+                          PRIMARY KEY(id_partido, id_usuario),
+                          FOREIGN KEY(id_partido) REFERENCES partidos(id_partido) ON DELETE CASCADE,
+                          FOREIGN KEY(id_usuario) REFERENCES usuarios(id_usuario) ON DELETE CASCADE
 );
 
 CREATE TABLE apuestas_detalle (
-    id_partido INT UNSIGNED,
-    id_usuario INT UNSIGNED,
-    id_equipo INT UNSIGNED,
-    goles_apostados INT,
-    PRIMARY KEY(id_partido, id_usuario, id_equipo),
-    FOREIGN KEY (id_partido, id_usuario) REFERENCES apuestas(id_partido, id_usuario) ON DELETE CASCADE,
-    FOREIGN KEY (id_equipo) REFERENCES equipos(id_equipo) ON DELETE CASCADE
+                                  id_partido INT UNSIGNED,
+                                  id_usuario INT UNSIGNED,
+                                  id_equipo INT UNSIGNED,
+                                  goles_apostados INT,
+                                  PRIMARY KEY(id_partido, id_usuario, id_equipo),
+                                  FOREIGN KEY (id_partido, id_usuario) REFERENCES apuestas(id_partido, id_usuario) ON DELETE CASCADE,
+                                  FOREIGN KEY (id_equipo) REFERENCES equipos(id_equipo) ON DELETE CASCADE
 );
 
 
@@ -84,8 +84,7 @@ INSERT INTO partidos (fecha) VALUES
                                  ('2025-05-22'), -- Partido 3
                                  ('2025-05-23'), -- Partido 4
                                  ('2025-05-24'), -- Partido 5
-                                 ('2025-05-25'), -- Partido 6
-                                 ('2025-05-26'); -- Partido 7
+                                 ('2025-05-25'); -- Partido 6
 
 -- Relación juegan
 INSERT INTO juegan (id_partido, id_equipo, goles) VALUES
@@ -120,10 +119,9 @@ INSERT INTO usuarios (email, password, puntos) VALUES
                                                    ('usuario20@email.com', 'p@ssword', 770);
 
 
-SELECT equipos.imagen_escudo
-FROM equipos
-         INNER JOIN juegan ON equipos.id_equipo = juegan.id_equipo INNER JOIN partidos ON juegan.id_partido = partidos.id_partido ORDER BY partidos.fecha ASC;
+SELECT equipos.* FROM equipos INNER JOIN juegan ON equipos.id_equipo = juegan.id_equipo INNER JOIN partidos ON juegan.id_partido = partidos.id_partido ORDER BY partidos.fecha ASC;
 
 SELECT * FROM apuestas_detalle;
 SELECT * FROM apuestas;
 SELECT * FROM usuarios;
+SELECT * FROM equipos;

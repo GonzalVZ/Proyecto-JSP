@@ -3,7 +3,7 @@
 <%@ page import="modelos.Equipo" %>
 
 
-<h3>Formulario equipo</h3>
+<h3>MODIFICAR EQUIPO</h3>
 
 <form action="index.jsp" method="get">
 <%
